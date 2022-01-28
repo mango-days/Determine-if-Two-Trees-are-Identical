@@ -57,9 +57,25 @@ class BinaryTree :
         if node.right : 
             y = y + self.height ( node.right )
         return max ( x , y )
-        
+    
+    def isSimilar ( self , node1 , node2 ) :
+        if ( node1 and node2 and node1.left == None and node1.right == None and node2.right == None and node2.left == None ) : return True
+        if node1 == None and node2 == None : return True
+        elif node1 == None or node2 == None : return False
+        x = False
+        y = False
+        if node1.left and node2.left : x = self.isSimilar ( node1.left , node2.left )
+        if node1.right and node2.right : y = self.isSimilar ( node1.right , node2.right )
+        if x == False or y == False : return False
+        return True
+
 Obj = BinaryTree ()
 arr = [ 5 , 3 , 8 , 2 , 6 , 4 , 9 ]
 for index , value in enumerate ( arr ) : Obj.insert ( value )
-Obj.printList ( Obj.root )
-print ( "height =", Obj.height ( Obj.root ) )
+
+O = BinaryTree ()
+arr = [ 5 , 8 , 3 , 2 , 6 , 4 , 9 ]
+for index , value in enumerate ( arr ) : O.insert ( value )
+
+x = Obj.isSimilar ( Obj.root , O.root )
+print ("similarity =", x )
